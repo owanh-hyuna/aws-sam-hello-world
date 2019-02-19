@@ -7,7 +7,13 @@ Outputs:
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+      Fn::Join:
+      - ''
+      - - https://
+        - Ref: ApiGatewayAPI
+        - .execute-api.
+        - Ref: AWS::Region
+        - .amazonaws.com/Prod/hello/
   HelloWorldFunction:
     Description: Hello World Lambda Function ARN
     Value:
@@ -21,18 +27,18 @@ Outputs:
       - HelloWorldFunctionRole
       - Arn
 Resources:
+  ApiGatewayAPI:
+    Properties:
+      DefinitionUri: s3://serverless-sam-hello-world/126c8ae01d0b858088edfa3bc7514883
+      StageName: Prod
+    Type: AWS::Serverless::Api
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://serverless-sam-hello-world/973137931c4b770c383cddb4be8cc681
+      CodeUri: s3://serverless-sam-hello-world/48da4157c68fb2e8f7809d7636d6f33a
       Environment:
         Variables:
           PARAM1: VALUE
-      Events:
-        HelloWorld:
-          Properties:
-            Method: get
-            Path: /hello
-          Type: Api
+      FunctionName: hello-world-sam-owan
       Handler: app.lambdaHandler
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
