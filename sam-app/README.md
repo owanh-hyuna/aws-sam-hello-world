@@ -5,7 +5,7 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 ```bash
 .
 ├── README.md                   <-- This instructions file
-├── hello-world                 <-- Source code for a lambda function
+├── hello-world-sam                 <-- Source code for a lambda function
 │   ├── app.js                  <-- Lambda function code
 │   ├── package.json            <-- NodeJS dependencies
 │   └── tests                   <-- Unit tests
@@ -16,9 +16,9 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 
 ## Requirements
 
-* AWS CLI already configured with Administrator permission
-* [NodeJS 8.10+ installed](https://nodejs.org/en/download/)
-* [Docker installed](https://www.docker.com/community-edition)
+-   AWS CLI already configured with Administrator permission
+-   [NodeJS 8.10+ installed](https://nodejs.org/en/download/)
+-   [Docker installed](https://www.docker.com/community-edition)
 
 ## Setup process
 
@@ -26,16 +26,17 @@ This is a sample template for sam-app - Below is a brief explanation of what we 
 
 [AWS Lambda requires a flat folder](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-create-deployment-pkg.html) with the application as well as its dependencies in a node_modules folder. When you make changes to your source code or dependency manifest,
 run the following command to build your project local testing and deployment:
- 
+
 ```bash
 sam build
 ```
 
 If your dependencies contain native modules that need to be compiled specifically for the operating system running on AWS Lambda, use this command to build inside a Lambda-like Docker container instead:
+
 ```bash
 sam build --use-container
 ```
- 
+
 By default, this command writes built artifacts to `.aws-sam/build` folder.
 
 ### Local development
@@ -51,7 +52,8 @@ If the previous command ran successfully you should now be able to hit the follo
 **SAM CLI** is used to emulate both Lambda and API Gateway locally and uses our `template.yaml` to understand how to bootstrap this environment (runtime, where the source code is, etc.) - The following excerpt is what the CLI will read in order to initialize an API and its routes:
 
 ```yaml
-...
+
+---
 Events:
     HelloWorld:
         Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -69,7 +71,7 @@ AWS Lambda NodeJS runtime requires a flat folder with all dependencies including
     FirstFunction:
         Type: AWS::Serverless::Function
         Properties:
-            CodeUri: hello-world/
+            CodeUri: hello-world-sam/
             ...
 ```
 
@@ -105,14 +107,14 @@ After deployment is complete you can run the following command to retrieve the A
 aws cloudformation describe-stacks \
     --stack-name sam-app \
     --query 'Stacks[].Outputs'
-``` 
+```
 
 ## Testing
 
 We use `mocha` for testing our code and it is already added in `package.json` under `scripts`, so that we can simply run the following command to run our tests:
 
 ```bash
-cd hello-world
+cd hello-world-sam
 npm install
 npm run test
 ```
@@ -145,10 +147,10 @@ aws cloudformation describe-stacks \
 
 Here are a few ideas that you can use to get more acquainted as to how this overall process works:
 
-* Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
-* Update unit test to capture that
-* Package & Deploy
+-   Create an additional API resource (e.g. /hello/{proxy+}) and return the name requested through this new path
+-   Update unit test to capture that
+-   Package & Deploy
 
 Next, you can use the following resources to know more about beyond hello world samples and how others structure their Serverless applications:
 
-* [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)
+-   [AWS Serverless Application Repository](https://aws.amazon.com/serverless/serverlessrepo/)
