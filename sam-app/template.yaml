@@ -13,6 +13,7 @@ Resources:
             FunctionName: hello-world-sam-owan
             Handler: app.lambdaHandler
             Runtime: nodejs8.10
+            Role: arn:aws:iam::275552291381:role/DevLambdaRole
             Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
                 Variables:
                     PARAM1: VALUE
@@ -35,7 +36,3 @@ Outputs:
     HelloWorldFunction:
         Description: 'Hello World Lambda Function ARN'
         Value: !GetAtt HelloWorldFunction.Arn
-
-    HelloWorldFunctionIamRole:
-        Description: 'Implicit IAM Role created for Hello World function'
-        Value: !GetAtt HelloWorldFunctionRole.Arn

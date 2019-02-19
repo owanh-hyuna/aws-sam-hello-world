@@ -20,12 +20,6 @@ Outputs:
       Fn::GetAtt:
       - HelloWorldFunction
       - Arn
-  HelloWorldFunctionIamRole:
-    Description: Implicit IAM Role created for Hello World function
-    Value:
-      Fn::GetAtt:
-      - HelloWorldFunctionRole
-      - Arn
 Resources:
   ApiGatewayAPI:
     Properties:
@@ -34,12 +28,13 @@ Resources:
     Type: AWS::Serverless::Api
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://serverless-sam-hello-world/48da4157c68fb2e8f7809d7636d6f33a
+      CodeUri: s3://serverless-sam-hello-world/acc465ba6bd175de3e7b8e5e1f49035c
       Environment:
         Variables:
           PARAM1: VALUE
       FunctionName: hello-world-sam-owan
       Handler: app.lambdaHandler
+      Role: arn:aws:iam::275552291381:role/DevLambdaRole
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31
