@@ -10,7 +10,7 @@ Resources:
         Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
         Properties:
             CodeUri: hello-world-sam/
-            FunctionName: hello-world-sam-owan
+            FunctionName: hello-world-sam-2
             Handler: app.lambdaHandler
             Runtime: nodejs8.10
             Role: arn:aws:iam::438594535251:role/serverless-deployment-service-role
