@@ -23,16 +23,16 @@ Outputs:
 Resources:
   ApiGatewayAPI:
     Properties:
-      DefinitionUri: s3://milkgate-serverless-deployments/hello-world/bffee8728d4b8da14109227f54744851
+      DefinitionUri: s3://milkgate-serverless-deployments/hello-world/00806ccb5fa6a8b6ace0e106d20a6bc2
       StageName: Prod
     Type: AWS::Serverless::Api
   HelloWorldFunction:
     Properties:
-      CodeUri: s3://milkgate-serverless-deployments/hello-world/1feb130e14b8a536e4a2fdc07e2dcbd8
+      CodeUri: s3://milkgate-serverless-deployments/hello-world/b8a244f3af6528dc83374665f2b84a3c
       Environment:
         Variables:
           PARAM1: VALUE
-      FunctionName: hello-world-sam-owan
+      FunctionName: hello-world-sam-2
       Handler: app.lambdaHandler
       Role: arn:aws:iam::438594535251:role/serverless-deployment-service-role
       Runtime: nodejs8.10
